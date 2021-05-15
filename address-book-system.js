@@ -154,11 +154,22 @@ class AddressBookContact {
     }
 }
 
-/**
- * Created a new contact
- */
-let addressBook = new AddressBookContact("Sanketh", "Chigurupalli", "Alwal", 
-    "Hyderabad", "Telangana", 500015, "9700000000", "sanketh.chigur@gmail.com");
+//Created array for storing all contacts
+let addressBookArray = new Array();
+let contact;
+ try {
+    contact = new AddressBookContact("Sanketh", "Chigurupalli", "Alwal", 
+        "Hyderabad", "Telangana", 500015, 9700000000, "sanketh.chigur@gmail.com");
+    addressBookArray.push(contact);
+    contact = new AddressBookContact("Aman", "Singh", "Barkatpur", 
+        "Chennai", "Tamilnadu", 630015, 6700040000, "aman.singh@gmail.com");
+    addressBookArray.push(contact);
+    contact = new AddressBookContact("Premraj", "Kathil", "Ganeshapur", 
+        "Mumbai", "Maharastra", 456015, 9876543210, "premraj@gmail.com");
+    addressBookArray.push(contact);
+ } catch (e) {
+     console.error(e);
+ }
 
 //Printing the added contact to console
-console.log(addressBook.toString());
+console.log(addressBookArray.toString());
