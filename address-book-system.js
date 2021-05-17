@@ -236,18 +236,31 @@ function deleteContact(firstName, lastName) {
             console.log("\nAddress book after removing contact: First Name: " + firstName + " Last Name: " + lastName);
             addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
         } else {
-            throw ("/nThis contact doesm't exist in your address book");
+            throw ("This contact doesn't exist in your address book");
         }
     }catch (error) {
         console.error(error);
     }
 }
 
-// deleting a contact
-deleteContact("Sanketh", "Chigurupalli");
-console.log("/nAddress book after deleting contact : ");
+//function for getting contact count
+function contactCount (count) {
+    return count + 1;
+}
+
+// number of contacts in address book
+let totalCount = addressBookArray.reduce(contactCount, 0);
+console.log("\n******Total number of contacts in address book are " + totalCount + "******");
+
+//edits the present array of contacts
+editField("Sanketh", "Chigurupalli", "lastName", "Babbur");
+console.log("Address book after updating contact : ");
 addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
 
+// deleting a contact
+deleteContact("Sanketh", "Chigurupalli");
+console.log("\nAddress book after deleting contact : ");
+addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
 
 //return contact doesn't exist
 findContact("Kumaran", "Varma");
