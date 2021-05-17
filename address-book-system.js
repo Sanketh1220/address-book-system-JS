@@ -148,9 +148,9 @@ class AddressBookContact {
      * @returns String formatted contact
      */
     toString() {
-        return "firstName="+this.firstName+" ,lastName="+this.lastName+
+        return " { " + "firstName="+this.firstName+" ,lastName="+this.lastName+
         " ,address="+this.address+" ,city="+this.city+" ,state="+this.state+
-        " ,zip="+this.zip+" ,phoneNumber="+this.phoneNumber+" ,email="+this.email;
+        " ,zip="+this.zip+" ,phoneNumber="+this.phoneNumber+" ,email="+this.email + " } ||";
     }
 }
 
@@ -222,16 +222,32 @@ function findContact(firstName, lastName) {
     }
 }
 
-try{
-    editField("Sanketh", "Chigurupalli", "address", "Alwal");
-} catch(error) {
-    console.error(error);
-}
-
 //edits the present array of contacts
 editField("Sanketh", "Chigurupalli", "lastName", "Babbur");
-console.log("ADDRESS BOOK ARRAY AFTER UPADTING CONTACT : ");
+console.log("Address book after updating contact : ");
 addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
+
+// function written for deleting a contact from address book
+function deleteContact(firstName, lastName) {
+    try {
+        let index =  addressBookArray.findIndex(contact => contact._firstName == firstName && contact._lastName == lastName);
+        if (index != -1) {
+            addressBookArray.splice(index, 1);
+            console.log("\nAddress book after removing contact: First Name: " + firstName + " Last Name: " + lastName);
+            addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
+        } else {
+            throw ("/nThis contact doesm't exist in your address book");
+        }
+    }catch (error) {
+        console.error(error);
+    }
+}
+
+// deleting a contact
+deleteContact("Sanketh", "Chigurupalli");
+console.log("/nAddress book after deleting contact : ");
+addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
+
 
 //return contact doesn't exist
 findContact("Kumaran", "Varma");
