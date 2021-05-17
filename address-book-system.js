@@ -167,9 +167,71 @@ let contact;
     contact = new AddressBookContact("Premraj", "Kathil", "Ganeshapur", 
         "Mumbai", "Maharastra", 456015, 9876543210, "premraj@gmail.com");
     addressBookArray.push(contact);
+    console.log("Address book array: ");
+    addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
  } catch (e) {
      console.error(e);
  }
 
-//Printing the added contact to console
-console.log(addressBookArray.toString());
+ // function to edit fields of contact
+ function editField(firstName, lastName, fieldName, updatedField) {
+    try {
+        let contact = findContact(firstName, lastName);
+        switch (fieldName) {
+            case "firstName":
+                contact.firstName = updatedField;
+                break;
+            case "lastName":
+                contact.lastName = updatedField;
+                break;
+            case "address":
+                contact.address = updatedField;
+                break;
+            case "city":
+                contact.city = updatedField;
+                break;
+            case "state":
+                contact.state = updatedField;
+                break;
+            case "zipCode":
+                contact.zipCode = updatedField;
+                break;
+            case "phoneNumber":
+                contact.phoneNumber = updatedField;
+                break;
+            case "email":
+                contact.email = updatedField;
+                break;
+            default:
+                throw "Field for Updation : " + fieldName + " is Invalid!";
+        }
+        console.log("ADDRESS BOOK ARRAY AFTER UPADTING CONTACT : ");
+        addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// function for finding the contact from an array
+function findContact(firstName, lastName) {
+    let contact = addressBookArray.find(contact => contact._firstName == firstName && contact._lastName == lastName);
+    if(contact != undefined){
+        return contact;
+    }else {
+        throw "\nContact : " + firstName + " " + lastName + " does't exit in your address book";
+    }
+}
+
+try{
+    editField("Sanketh", "Chigurupalli", "address", "Alwal");
+} catch(error) {
+    console.error(error);
+}
+
+//edits the present array of contacts
+editField("Sanketh", "Chigurupalli", "lastName", "Babbur");
+console.log("ADDRESS BOOK ARRAY AFTER UPADTING CONTACT : ");
+addressBookArray.forEach(contact => process.stdout.write(contact.toString()));
+
+//return contact doesn't exist
+findContact("Kumaran", "Varma");
